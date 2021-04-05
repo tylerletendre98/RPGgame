@@ -31,7 +31,6 @@ function runGame(){
     attack(hercules,lion);
     displayNewFoe(hydra);
     attack(hercules,hydra);
-    displayVictor(hercules,hydra);
     endGame();
     
 }
@@ -41,9 +40,15 @@ function attack(hercules,otherCharacter){
     while (hercules.health >= 0 && otherCharacter.health >= 0){
         let herculesAction = chooseHerculesAction(hercules);
         otherCharacter.health -= hercules.attackPower;
-        let otherCharacterAttack =  otherCharacter.attacks[Math.floor(Math.random() * otherCharacter.attacks.length)];
-        hercules.health -= otherCharacter.attackPower;
-        alert(`${hercules.name} ${herculesAction} ${otherCharacter.name} now ${otherCharacter.name} health is ${otherCharacter.health} then ${otherCharacter.name} comes back and ${otherCharacterAttack} now ${hercules.name} health is ${hercules.health}.`);
+        if (otherCharacter.health >= 0){
+            let otherCharacterAttack =  otherCharacter.attacks[Math.floor(Math.random() * otherCharacter.attacks.length)];
+            hercules.health -= otherCharacter.attackPower;
+            alert(`${hercules.name} ${herculesAction} ${otherCharacter.name} now ${otherCharacter.name} health is ${otherCharacter.health} then ${otherCharacter.name} comes back and ${otherCharacterAttack} now ${hercules.name} health is ${hercules.health}.`);
+        }
+        else{
+            displayVictor(hercules,otherCharacter);
+        }
+    
     }
 
 }
@@ -96,7 +101,7 @@ function chooseHerculesAction(hercules){
 }
 //displays the victor of the battle
 function displayVictor(hercules,otherCharacter){
-    if (otherCharacter.health >= 0){
+    if (otherCharacter.health <= 0){
     alert(`${hercules.name} has defeated ${otherCharacter.name}`);
     }
     else{
@@ -110,8 +115,8 @@ function displayNewFoe(otherCharacter){
     alert(`A new foe approaches their name is ${otherCharacter.name} their health is ${otherCharacter.health}.`);
 }
 function endGame(){
-    if(hercules.health < 0){
-    alert('You have defeated the your foes and have captured the guard dog to hell, Congrats you have comepleted the mission!');
+    if(hercules.health > 0){
+    alert('You have defeated the your foes and have captured the guard dog to the underworld, Congrats you have comepleted the mission!');
     }
     else{
         alert(`${hercules.name} has been defeated! You failed to finish your mission.`);
