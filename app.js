@@ -22,8 +22,8 @@ let hydra = {
     attackPower : 40
 }
 
-//Calls on the game to run
-runGame();
+//Starts the application
+acceptMission();
 
 //runs the actual game
 function runGame(){
@@ -48,13 +48,23 @@ function attack(hercules,otherCharacter){
 
 }
 
+//Displays game start story
+function acceptMission(){
+    let acceptsMission = prompt('You have been tasked by King Eurstheus to go and capture the Guard Dog of the underworld Cerberus. Along the way you may encounter Large foes that you will need to defeat do you want to accept this mission: yes or no? ');
+    if(acceptsMission == "yes"){
+        alert('You have accepted the mission you will now being your quest!');
+        runGame();
+    }
+    else{
+        alert('I guess you dont have what it takes!');
+    }
+}
 // Lets you pick what hercules does
-
 function chooseHerculesAction(hercules){
     let herculesAction = prompt(`What action would you like to take? \. 1. kick \. 2. punch \. 3. throw \. 4. regenerate health`);
     switch(herculesAction){
         case '1' :{
-            let herculesAction = 'punches';
+            let herculesAction = 'kicks';
             alert('You have chosen Kick');
             hercules.attackPower = 40;
             return herculesAction;
