@@ -11,14 +11,14 @@ let hercules ={
 let lion ={
     name: 'Nemean Lion',
     health: 100,
-    attacks : ['bite','kick', 'claw'],
+    attacks : ['bites','kicks', 'claws'],
     attackPower : 30
 }
 
 let hydra = {
     name : "Lernaean Hydra",
     health : 200,
-    attacks : ['Spits Fire', 'bite'],
+    attacks : ['Spits Fire at', 'bites'],
     attackPower : 40
 }
 let guardDog = {
@@ -47,7 +47,7 @@ function attack(hercules,otherCharacter){
         if (otherCharacter.health >= 1){
             let otherCharacterAttack =  otherCharacter.attacks[Math.floor(Math.random() * otherCharacter.attacks.length)];
             hercules.health -= otherCharacter.attackPower;
-            alert(`${hercules.name} ${herculesAction} ${otherCharacter.name} now ${otherCharacter.name} health is ${otherCharacter.health} then ${otherCharacter.name} comes back and ${otherCharacterAttack} now ${hercules.name} health is ${hercules.health}.`);
+            alert(`${hercules.name} ${herculesAction} now ${otherCharacter.name} health is ${otherCharacter.health} then ${otherCharacter.name} comes back and ${otherCharacterAttack} now ${hercules.name} health is ${hercules.health}.`);
         }
         else{
             displayVictor(hercules,otherCharacter);
