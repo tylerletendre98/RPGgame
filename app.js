@@ -18,9 +18,12 @@ let lion ={
 let hydra = {
     name : "Lernaean Hydra",
     health : 200,
-    attacks : ['spitFire', 'bite'],
+    attacks : ['Spits Fire', 'bite'],
     attackPower : 40
 }
+
+//Calls on the game to run
+runGame();
 
 //runs the actual game
 function runGame(){
@@ -28,7 +31,7 @@ function runGame(){
     attack(hercules,lion);
     displayNewFoe(hydra);
     attack(hercules,hydra);
-    displayVictor(hercules);
+    displayVictor(hercules,hydra);
     endGame();
     
 }
@@ -36,15 +39,51 @@ function runGame(){
 //runs the actual battle of characters
 function attack(hercules,otherCharacter){
     while (hercules.health >= 0 && otherCharacter.health >= 0){
-        let herculesAttack = prompt(`choose an attack for hercules! ${hercules.attacks}: `);
+        let herculesAction = chooseHerculesAction(hercules);
         otherCharacter.health -= hercules.attackPower;
         let otherCharacterAttack =  otherCharacter.attacks[Math.floor(Math.random() * otherCharacter.attacks.length)];
         hercules.health -= otherCharacter.attackPower;
-        alert(`${hercules.name} ${herculesAttack} ${otherCharacter.name} now ${otherCharacter.name} health is ${otherCharacter.health} then ${otherCharacter.name} comes back and ${otherCharacterAttack} now ${hercules.name} health is ${hercules.health}.`);
+        alert(`${hercules.name} ${herculesAction} ${otherCharacter.name} now ${otherCharacter.name} health is ${otherCharacter.health} then ${otherCharacter.name} comes back and ${otherCharacterAttack} now ${hercules.name} health is ${hercules.health}.`);
     }
 
 }
 
+// Lets you pick what hercules does
+
+function chooseHerculesAction(hercules){
+    let herculesAction = prompt(`What action would you like to take? \. 1. kick \. 2. punch \. 3. throw \. 4. regenerate health`);
+    switch(herculesAction){
+        case '1' :{
+            let herculesAction = 'punches';
+            alert('You have chosen Kick');
+            hercules.attackPower = 40;
+            return herculesAction;
+        }
+        case '2' :{
+            let herculesAction = 'punches';
+            alert('you have chosen Punch');
+            hercules.attackPower = 50;
+            return herculesAction;
+        }
+        case '3':{
+            let herculesAction = 'throws';
+            alert('You have chosen throws');
+            hercules.attackPower = 20;
+            return herculesAction;
+        }
+        case '4': {
+            let herculesAction = 'regenerates health';
+            alert('You have chosen Regenerate Health');
+            hercules.health += 50;
+            hercules.attackPower = 0;
+            return herculesAction;
+        }
+        default: {
+            alert('that was not a valid response please try again');
+            return chooseHerculesAction(hercules);
+        }
+    }
+}
 //displays the victor of the battle
 function displayVictor(hercules,otherCharacter){
     if (otherCharacter.health >= 0){
@@ -69,7 +108,4 @@ function endGame(){
     }
 }
 
-
-
-runGame();
 
