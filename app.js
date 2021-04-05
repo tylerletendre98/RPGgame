@@ -21,6 +21,10 @@ let hydra = {
     attacks : ['Spits Fire', 'bite'],
     attackPower : 40
 }
+let guardDog = {
+    name : 'Cerberus',
+    isCaptured: false
+}
 
 //Starts the application
 acceptMission();
@@ -31,16 +35,16 @@ function runGame(){
     attack(hercules,lion);
     displayNewFoe(hydra);
     attack(hercules,hydra);
-    endGame();
-    
+    captureDog();
+    isDogCaptured(guardDog.isCaptured);
 }
 
 //runs the actual battle of characters
 function attack(hercules,otherCharacter){
-    while (hercules.health >= 0 && otherCharacter.health >= 0){
+    while (hercules.health >= 1 && otherCharacter.health >= 1){
         let herculesAction = chooseHerculesAction(hercules);
         otherCharacter.health -= hercules.attackPower;
-        if (otherCharacter.health >= 0){
+        if (otherCharacter.health >= 1){
             let otherCharacterAttack =  otherCharacter.attacks[Math.floor(Math.random() * otherCharacter.attacks.length)];
             hercules.health -= otherCharacter.attackPower;
             alert(`${hercules.name} ${herculesAction} ${otherCharacter.name} now ${otherCharacter.name} health is ${otherCharacter.health} then ${otherCharacter.name} comes back and ${otherCharacterAttack} now ${hercules.name} health is ${hercules.health}.`);
@@ -60,8 +64,12 @@ function acceptMission(){
         alert('You have accepted the mission you will now being your quest!');
         runGame();
     }
-    else{
+    else if (acceptsMission == "no"){
         alert('I guess you dont have what it takes!');
+    }
+    else{
+        alert('that was no a correct response please try again!');
+        return acceptMission();
     }
 }
 // Lets you pick what hercules does
@@ -122,5 +130,22 @@ function endGame(){
         alert(`${hercules.name} has been defeated! You failed to finish your mission.`);
     }
 }
+//function to determined if the dog is captured
+function isDogCaptured(isCaptured){
+    if (isCaptured = true){
+        alert('You have captured the Guard dog to the underworld!')
+        endGame();
+    }
+}
 
-
+//function to determine if user catches the guard dog
+function captureDog(){
+    alert('You have defeated your foes and you now have the chance to capture the guard dog but you have a challenge to overcome!')
+    let usersChoice = parseFloat(prompt('enter a number 1 through 4 if you chose the right number you will capture Cerberus if you get it wrong you will have to chose again.'));
+    let rightNumber = 4;
+    while (usersChoice != rightNumber){
+        usersChoice = parseFloat(prompt('Your choice was incorrect please chose again'));
+        
+    }
+    return guardDog.isCaptured = true;
+}
